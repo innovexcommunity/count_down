@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>InnoveX — Launching</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    :root {
+      --yellow: #f5c400;
+      --yellow2: #ffd83d;
+      --white: #f6f4ec;
+      --muted: #a7a49a;
+      --black: #050505
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: var(--black);
+      color: var(--white)
+    }
+
+    body {
+      font-family: 'DM Sans', Arial, sans-serif;
+      position: relative
+    }
+
+    /* physical-looking stage decorations */
+    body:before {
+      content: "";
+      position: absolute;
+      inset: 18px;
+      border: 1px solid rgba(245, 196, 0, .22);
+      pointer-events: none
+    }
+
+    body:after {
+      content: "";
+      position: absolute;
+      inset: 30px;
+      border: 1px solid rgba(255, 255, 255, .055);
+      pointer-events: none
+    }
+
+    .grid {
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(rgba(255, 255, 255, .035) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .035) 1px, transparent 1px);
+      background-size: 70px 70px;
+      mask-image: linear-gradient(to bottom, transparent 0%, black 25%, black 75%, transparent 100%);
+      opacity: .45
+    }
+
+    .glow {
+      position: absolute;
+      width: 55vw;
+      height: 55vw;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(245, 196, 0, .09) 0%, rgba(245, 196, 0, .025) 28%, transparent 68%);
+      left: 50%;
+      top: 48%;
+      transform: translate(-50%, -50%);
+      pointer-events: none
+    }
+
+    .corner {
+      position: absolute;
+      width: 86px;
+      height: 86px;
+      opacity: .85
+    }
+
+    .corner:before,
+    .corner:after {
+      content: "";
+      position: absolute;
+      background: var(--yellow)
+    }
+
+    .corner:before {
+      width: 55px;
+      height: 1px
+    }
+
+    .corner:after {
+      height: 55px;
+      width: 1px
+    }
+
+    .c1 {
+      top: 42px;
+      left: 42px
+    }
+
+    .c2 {
+      top: 42px;
+      right: 42px;
+      transform: scaleX(-1)
+    }
+
+    .c3 {
+      bottom: 42px;
+      left: 42px;
+      transform: scaleY(-1)
+    }
+
+    .c4 {
+      bottom: 42px;
+      right: 42px;
+      transform: scale(-1)
+    }
+
+    .header {
+      position: absolute;
+      top: 54px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(1180px, calc(100% - 120px));
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 2
+    }
+
+    .brand {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: .24em;
+      color: var(--white)
+    }
+
+    .brand span {
+      color: var(--yellow)
+    }
+
+    .event-label {
+      font-size: 11px;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: #88857b
+    }
+
+    .main {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      z-index: 1
+    }
+
+    .content {
+      width: min(1100px, 90vw);
+      padding-top: 10px
+    }
+
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 13px;
+      color: var(--yellow);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      margin-bottom: 25px
+    }
+
+    .kicker:before,
+    .kicker:after {
+      content: "";
+      width: 42px;
+      height: 1px;
+      background: var(--yellow);
+      opacity: .7
+    }
+
+    .title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(42px, 6.2vw, 92px);
+      line-height: .94;
+      font-weight: 600;
+      letter-spacing: -.055em;
+      text-transform: uppercase
+    }
+
+    .title .outline {
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(246, 244, 236, .5)
+    }
+
+    .subtitle {
+      margin: 25px auto 0;
+      color: #9e9b91;
+      font-size: 13px;
+      letter-spacing: .2em;
+      text-transform: uppercase
+    }
+
+    .start-btn {
+      margin: 28px auto 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 13px 25px;
+      border: 1px solid rgba(245, 196, 0, .65);
+      background: rgba(245, 196, 0, .07);
+      color: var(--white);
+      font: 600 11px/1 'DM Sans', Arial, sans-serif;
+      letter-spacing: .24em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: .25s ease;
+      box-shadow: 0 0 0 rgba(245, 196, 0, 0)
+    }
+
+    .start-btn:hover {
+      background: var(--yellow);
+      color: #050505;
+      box-shadow: 0 0 28px rgba(245, 196, 0, .2);
+      transform: translateY(-2px)
+    }
+
+    .start-btn .play {
+      width: 0;
+      height: 0;
+      border-top: 5px solid transparent;
+      border-bottom: 5px solid transparent;
+      border-left: 7px solid currentColor
+    }
+
+    .start-btn.hidden {
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-8px);
+      height: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+      margin-top: 0
+    }
+
+    .ready-note {
+      margin-top: 12px;
+      font-size: 9px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: #65625b;
+      transition: .3s ease
+    }
+
+    .ready-note.hidden {
+      opacity: 0
+    }
+
+    .timer-wrap {
+      position: relative;
+      width: min(430px, 66vw);
+      aspect-ratio: 1;
+      margin: 35px auto 0;
+      display: grid;
+      place-items: center
+    }
+
+    .ring {
+      position: absolute;
+      inset: 0;
+      border: 1px solid rgba(245, 196, 0, .18);
+      border-radius: 50%
+    }
+
+    .ring.r2 {
+      inset: 12px;
+      border: 1px dashed rgba(255, 255, 255, .12);
+      animation: spin 24s linear infinite
+    }
+
+    .ring.r3 {
+      inset: 30px;
+      border: 1px solid rgba(245, 196, 0, .12)
+    }
+
+    .progress {
+      position: absolute;
+      inset: 5px;
+      border-radius: 50%;
+      background: conic-gradient(var(--yellow) var(--progress), transparent 0);
+      -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1px));
+      mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1px));
+      transform: rotate(-90deg)
+    }
+
+    .tick {
+      position: absolute;
+      inset: -9px;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, transparent 0deg 5deg, rgba(255, 255, 255, .32) 5.5deg 6deg, transparent 6.5deg 15deg);
+      -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 10px), #000 calc(100% - 9px));
+      mask: radial-gradient(farthest-side, transparent calc(100% - 10px), #000 calc(100% - 9px));
+      opacity: .5
+    }
+
+    .time {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(105px, 16vw, 210px);
+      font-weight: 600;
+      letter-spacing: -.09em;
+      line-height: .8;
+      position: relative;
+      z-index: 2;
+      color: var(--white);
+      font-variant-numeric: tabular-nums
+    }
+
+    .time:after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: -28px;
+      width: 5px;
+      height: 5px;
+      background: var(--yellow);
+      transform: translateX(-50%);
+      box-shadow: 0 0 20px var(--yellow)
+    }
+
+    .unit {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 10px;
+      letter-spacing: .38em;
+      text-transform: uppercase;
+      color: #7d7a71
+    }
+
+    .footer {
+      position: absolute;
+      bottom: 54px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(1180px, calc(100% - 120px));
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 2;
+      color: #6e6b63;
+      font-size: 10px;
+      letter-spacing: .18em;
+      text-transform: uppercase
+    }
+
+    .footer .line {
+      display: flex;
+      align-items: center;
+      gap: 12px
+    }
+
+    .dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--yellow);
+      box-shadow: 0 0 12px rgba(245, 196, 0, .65)
+    }
+
+    /* launch state */
+    body.launching .content {
+      animation: launchUp .8s ease forwards
+    }
+
+    body.launching .title,
+    body.launching .subtitle,
+    body.launching .kicker {
+      opacity: 0
+    }
+
+    body.launching .timer-wrap {
+      transform: scale(1.16);
+      opacity: 0;
+      transition: 1s ease
+    }
+
+    body.launching .footer,
+    body.launching .header {
+      opacity: 0;
+      transition: .5s ease
+    }
+
+    body.launching {
+      background: #080808
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg)
+      }
+    }
+
+    @keyframes launchUp {
+      to {
+        transform: translateY(-25px);
+        opacity: 0
+      }
+    }
+
+    @keyframes pulse {
+      50% {
+        transform: scale(1.015)
+      }
+    }
+
+    @media(max-width:700px) {
+      body:before {
+        inset: 10px
+      }
+
+      .header {
+        top: 32px;
+        width: calc(100% - 70px)
+      }
+
+      .event-label {
+        display: none
+      }
+
+      .brand {
+        font-size: 17px
+      }
+
+      .corner {
+        transform: scale(.7)
+      }
+
+      .c2 {
+        transform: scaleX(-1) scale(.7)
+      }
+
+      .c3 {
+        transform: scaleY(-1) scale(.7)
+      }
+
+      .c4 {
+        transform: scale(-1) scale(.7)
+      }
+
+      .title {
+        font-size: 12vw
+      }
+
+      .subtitle {
+        font-size: 9px;
+        letter-spacing: .14em
+      }
+
+      .timer-wrap {
+        margin-top: 28px
+      }
+
+      .footer {
+        bottom: 30px;
+        width: calc(100% - 70px);
+        font-size: 8px
+      }
+
+      .footer .right {
+        display: none
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="grid"></div>
+  <div class="glow"></div>
+  <div class="corner c1"></div>
+  <div class="corner c2"></div>
+  <div class="corner c3"></div>
+  <div class="corner c4"></div>
+
+  <header class="header">
+    <div class="brand">INNOV<span>E</span>X</div>
+    <div class="event-label">Official Website Launch</div>
+  </header>
+
+  <main class="main">
+    <section class="content">
+      <div class="kicker">The moment is here</div>
+      <h1 class="title">Something <span class="outline">New</span><br>Is About To Begin</h1>
+      <p class="subtitle">Welcome to the new InnoveX Community experience</p>
+      <button class="start-btn" id="startBtn"><span class="play"></span>Start Countdown</button>
+      <div class="ready-note" id="readyNote">Press start when the stage is ready</div>
+      <div class="timer-wrap">
+        <div class="tick"></div>
+        <div class="ring"></div>
+        <div class="ring r2"></div>
+        <div class="ring r3"></div>
+        <div class="progress" id="progress"></div>
+        <div class="time" id="timer">10</div>
+        <div class="unit">Seconds</div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="line"><span class="dot"></span><span>Innovate · Create · Connect</span></div>
+    <div class="right">CMR Institute of Technology · InnoveX</div>
+  </footer>
+
+  <script>
+    const duration = 10;
+    let remaining = duration;
+    let interval = null;
+    const timer = document.getElementById('timer');
+    const progress = document.getElementById('progress');
+    const startBtn = document.getElementById('startBtn');
+    const readyNote = document.getElementById('readyNote');
+    const target = 'https://innovexcommunity.github.io/club_page/';
+
+    function render() {
+      timer.textContent = String(Math.max(remaining, 0)).padStart(2, '0');
+      const done = ((duration - remaining) / duration) * 360;
+      progress.style.setProperty('--progress', done + 'deg');
+    }
+
+    function startCountdown() {
+      if (interval) return;
+      startBtn.classList.add('hidden');
+      readyNote.classList.add('hidden');
+      render();
+      interval = setInterval(() => {
+        remaining--;
+        render();
+        if (remaining <= 0) {
+          clearInterval(interval);
+          interval = null;
+          document.body.classList.add('launching');
+          setTimeout(() => window.location.replace(target), 900);
+        }
+      }, 1000);
+    }
+
+    startBtn.addEventListener('click', startCountdown);
+    render();
+  </script>
+</body>
+
+</html>
